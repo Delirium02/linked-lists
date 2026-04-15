@@ -58,12 +58,29 @@ class LinkedList {
 
     return current.value;
   }
+
+  at(index) {
+    if (index < 0 || this.firstNode === null) return undefined;
+
+    let length = 0;
+    let current = this.firstNode;
+
+    while (current !== null) {
+      if (length === index) return current;
+
+      current = current.nextNode;
+      length++;
+    }
+
+    return null;
+  }
 }
 
-const a = new LinkedList();
+const list = new LinkedList();
 
-a.append(5);
-a.append("53");
-a.prepend(17);
+list.append("Zero");
+list.append("One");
+list.append("Two");
 
-console.log(a.tail());
+console.log(list.at(0).value); 
+console.log(list.at(2).value); 
