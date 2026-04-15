@@ -8,9 +8,11 @@ class Node {
 class LinkedList {
   constructor() {
     this.head = null;
+    this.length = 0;
   }
 
   append(value) {
+    this.length++;
     const newNode = new Node(value);
 
     if (this.head === null) {
@@ -28,6 +30,7 @@ class LinkedList {
   }
 
   prepend(value) {
+    this.length++;
     const newNode = new Node(value);
 
     newNode.nextNode = this.head;
@@ -36,17 +39,18 @@ class LinkedList {
   }
 
   size() {
-    let totalNodes = 0;
-    let currentNode = this.head
+    return this.length;
+  }
 
-    if (currentNode !== null) {
-      totalNodes += 1;
-      while (currentNode.nextNode !== null) {
-        totalNodes += 1;
-        currentNode = currentNode.nextNode;
-      }
-    }
-    
-    return totalNodes;
+  head() {
+    if (this.head === null) return undefined;
+    else return this.head;
   }
 }
+
+const a = new LinkedList();
+
+a.append(5);
+a.prepend(17);
+
+console.log(a.head())
