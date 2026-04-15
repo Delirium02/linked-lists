@@ -46,4 +46,24 @@ class LinkedList {
     if (this.firstNode === null) return undefined;
     else return this.firstNode;
   }
+
+  tail() {
+    if (this.firstNode === null) return undefined;
+
+    let current = this.firstNode;
+
+    while (current.nextNode !== null) {
+      current = current.nextNode;
+    }
+
+    return current.value;
+  }
 }
+
+const a = new LinkedList();
+
+a.append(5);
+a.append("53");
+a.prepend(17);
+
+console.log(a.tail());
