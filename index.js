@@ -74,6 +74,16 @@ class LinkedList {
 
     return null;
   }
+
+  pop() {
+    if (this.firstNode === null) return undefined;
+
+    const headValue = this.firstNode.value;
+    this.firstNode = this.firstNode.nextNode;
+    this.length--;
+
+    return headValue;
+  }
 }
 
 const list = new LinkedList();
