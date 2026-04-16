@@ -62,11 +62,11 @@ class LinkedList {
 	at(index) {
 		if (index < 0 || this.firstNode === null) return undefined;
 
-		let length = 0;
 		let current = this.firstNode;
+		let length = 0;
 
 		while (current !== null) {
-			if (length === index) return current;
+			if (length === index) return current.value;
 
 			current = current.nextNode;
 			length++;
@@ -86,8 +86,6 @@ class LinkedList {
 	}
 
 	contains(value) {
-		if (this.firstNode === null) return false;
-
 		let current = this.firstNode;
 
 		while (current !== null) {
@@ -99,6 +97,20 @@ class LinkedList {
 
 		return false;
 	}
+
+	findIndex(value) {
+		let current = this.firstNode;
+		let index = 0;
+
+		while (current !== null) {
+			if (current.value === value) return index;
+
+			current = current.nextNode;
+			index++;
+		}
+
+		return -1;
+	}
 }
 
 const list = new LinkedList();
@@ -107,5 +119,6 @@ list.append("Zero");
 list.append("One");
 list.append("Two");
 
-console.log(list.at(0).value);
+console.log(list.at(0));
 console.log(list.contains("One"));
+console.log(list.findIndex("Zero"));
