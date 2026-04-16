@@ -111,6 +111,18 @@ class LinkedList {
 
 		return -1;
 	}
+
+  toString() {
+    let current = this.firstNode;
+    let string = "";
+
+    while (current !== null) {
+      string += `( ${current.value} ) -> `;
+      current = current.nextNode;
+    } 
+
+    return string + null;
+  }
 }
 
 const list = new LinkedList();
@@ -122,3 +134,4 @@ list.append("Two");
 console.log(list.at(0));
 console.log(list.contains("One"));
 console.log(list.findIndex("Zero"));
+console.log(list.toString());
