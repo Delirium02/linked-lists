@@ -112,17 +112,54 @@ class LinkedList {
 		return -1;
 	}
 
-  toString() {
-    let current = this.firstNode;
-    let string = "";
+	toString() {
+		let current = this.firstNode;
+		let string = "";
 
-    while (current !== null) {
-      string += `( ${current.value} ) -> `;
-      current = current.nextNode;
-    } 
+		while (current !== null) {
+			string += `( ${current.value} ) -> `;
+			current = current.nextNode;
+		}
 
-    return string + null;
-  }
+		return string + null;
+	}
+
+	insertAt(index, value) {
+		
+		const newNode = new Node(value);
+
+		if (index === 0) {
+			newNode.nextNode = this.firstNode;
+			this.firstNode = newNode;
+			this.length++;
+			return;
+		}
+
+		if (index === this.length + 1) {
+			let current = this.firstNode;
+
+			while (current.nextNode !== null) {
+				current = current.nextNode;
+			}
+
+			current.nextNode = newNode;
+			return;
+		}
+
+		let previous = this.firstNode;
+
+		for (let i = 0; i < index - 1; i++) {
+			previous = previous.nextNode;
+		}
+
+		if (!previous) {
+			throw new RangeError("not found");
+		}
+
+		newNode.nextNode = previous.nextNode;
+		previous.nextNode = newNode;
+		this.length++;
+	}
 }
 
 const list = new LinkedList();
@@ -134,4 +171,5 @@ list.append("Two");
 console.log(list.at(0));
 console.log(list.contains("One"));
 console.log(list.findIndex("Zero"));
+console.log(list.insertAt(0, "15"));
 console.log(list.toString());
