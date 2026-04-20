@@ -158,6 +158,27 @@ class LinkedList {
 		previous.nextNode = firstNewNode;
 		this.length += values.length;
 	}
+
+	removeAt(index) {
+		if (index < 0 || index > this.length) {
+			throw new RangeError("out of bounds");
+		}
+
+		if (index === 0) {
+			this.firstNode = this.firstNode.nextNode;
+			this.length--;
+			return;
+		}
+
+		let current = this.firstNode;
+
+		for (let i = 0; i < index -1; i++) {
+			current = current.nextNode;
+		}
+
+		current.nextNode = current.nextNode.nextNode;
+		this.length--;
+	}
 }
 
 const list = new LinkedList();
@@ -169,6 +190,7 @@ list.append("Two");
 console.log(list.at(0));
 console.log(list.contains("One"));
 console.log(list.findIndex("Zero"));
-console.log(list.insertAt(0, "15"));
+console.log(list.insertAt(1, "15"));
+console.log(list.removeAt(0));
 console.log(list.length);
 console.log(list.toString());
