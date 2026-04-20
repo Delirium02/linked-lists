@@ -124,41 +124,39 @@ class LinkedList {
 		return string + null;
 	}
 
-	insertAt(index, value) {
-		
-		const newNode = new Node(value);
+	insertAt(index, ...values) {
+		if (index < 0 || index > this.length) {
+			throw new RangeError("out of bounds");
+		}
 
+		if (values.length === 0) return;
+
+		let firstNewNode = new Node(values[0]);
+		let current = firstNewNode;
+
+		for (let i = 1; i < values.length; i++) {
+			current.nextNode = new Node(values[i]);
+			current = current.nextNode;
+		}
+
+		// Edge case, only when index is 0;
 		if (index === 0) {
-			newNode.nextNode = this.firstNode;
-			this.firstNode = newNode;
-			this.length++;
+			current.nextNode = this.firstNode;
+			this.firstNode = firstNewNode;
+			this.length += values.length;
 			return;
 		}
 
-		if (index === this.length + 1) {
-			let current = this.firstNode;
-
-			while (current.nextNode !== null) {
-				current = current.nextNode;
-			}
-
-			current.nextNode = newNode;
-			return;
-		}
-
+		// General case operation
 		let previous = this.firstNode;
 
 		for (let i = 0; i < index - 1; i++) {
 			previous = previous.nextNode;
 		}
 
-		if (!previous) {
-			throw new RangeError("not found");
-		}
-
-		newNode.nextNode = previous.nextNode;
-		previous.nextNode = newNode;
-		this.length++;
+		current.nextNode = previous.nextNode;
+		previous.nextNode = firstNewNode;
+		this.length += values.length;
 	}
 }
 
@@ -172,4 +170,5 @@ console.log(list.at(0));
 console.log(list.contains("One"));
 console.log(list.findIndex("Zero"));
 console.log(list.insertAt(0, "15"));
+console.log(list.length);
 console.log(list.toString());
